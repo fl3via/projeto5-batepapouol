@@ -1,34 +1,34 @@
 let nome = prompt('Qual é o seu nome?')
 
-const userName = { name: nome }
+const nomeUsuario = { name: nome }
 let chat = document.querySelector('.chat')
-const typedMessage = document.querySelector('.msg')
-verifyUser()
+const mensagemDigitada = document.querySelector('.text')
+verificandoUsuario()
 
-function verifyUser() {
-  const checked = axios.post(
-    'https://mock-api.driven.com.br/api/v6/uol/participants ',
-    userName
-    )
-  checked.then(okUser)
+function verificandoUsuario() {
+  const resposta = axios.post(
+    'https://mock-api.driven.com.br/api/v6/uol/participants',
+    nomeUsuario
+  )
+  resposta.then(usuarioOk)
 }
 
-function mantendoConexao(){
-  const connection = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', userName)
-  connection.then()
-  connection.catch()
+function conexao(){
+  const manterConexao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', nomeUsuario)
+  manterConexao.then()
+  manterConexao.catch()
 }
 
-function checkedChegou(checked) {
+function resposta(resposta) {
   let chat = document.querySelector('.chat')
   chat.innerHTML = ''
 
   for (let i = 0; i < 100; i++) {
-    let hora = checked.data[i].time
-    let nome1 = checked.data[i].from
-    let nome2 = checked.data[i].to
-    let texto = checked.data[i].msg
-    let tipo = checked.data[i].type
+    let hora = resposta.data[i].time
+    let nome1 = resposta.data[i].from
+    let nome2 = resposta.data[i].to
+    let texto = resposta.data[i].text
+    let tipo = resposta.data[i].type
 
     if (tipo === 'status' || tipo === 'message' ){
 
@@ -61,39 +61,39 @@ function deuErro(erro){
   window.location.reload()
 }
 
-function serverResponse() {
+function pegarConversaNoServidor() {
   const promessa = axios.get(
     'https://mock-api.driven.com.br/api/v6/uol/messages'
   )
 
-  promessa.then(checkedChegou)
+  promessa.then(resposta)
   promessa.catch(deuErro)
 }
 
-function sendMessage(){
+function enviarMensagem(){
 
   const msg = {
       from: nome,
       to: "Todos",
-      text: typedMessage.value,
+      text: mensagemDigitada.value,
       type: "message" 
   }
 
   const enviar = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', msg);
 
-  typedMessage.value=""
+  mensagemDigitada.value=""
 
-  enviar.then(serverResponse);
+  enviar.then(pegarConversaNoServidor);
   enviar.catch(deuErro);
 }
 
-function okUser (){
-  serverResponse()
+function usuarioOk (){
+  pegarConversaNoServidor()
   setInterval(function (){ 
-      serverResponse()
+      pegarConversaNoServidor()
   } ,3000)
   
-  setInterval(mantendoConexao, 5000);
+  setInterval(conexao, 5000);
 }
 
 document.addEventListener("keypress", function (e){
@@ -105,5 +105,3 @@ document.addEventListener("keypress", function (e){
       btn.click();
   }
 })
-  
-  

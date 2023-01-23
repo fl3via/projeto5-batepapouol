@@ -2,14 +2,14 @@ let nome = prompt('Qual é o seu nome?')
 
 const userName = { name: nome }
 let chat = document.querySelector('.chat')
-const typedMessage = document.querySelector('.text')
+const typedMessage = document.querySelector('.msg')
 verifyUser()
 
 function verifyUser() {
   const checked = axios.post(
-    'https://mock-api.driven.com.br/api/v6/uol/participants',
+    'https://mock-api.driven.com.br/api/v6/uol/participants ',
     userName
-  )
+    )
   checked.then(okUser)
 }
 
@@ -27,7 +27,7 @@ function checkedChegou(checked) {
     let hora = checked.data[i].time
     let nome1 = checked.data[i].from
     let nome2 = checked.data[i].to
-    let texto = checked.data[i].text
+    let texto = checked.data[i].msg
     let tipo = checked.data[i].type
 
     if (tipo === 'status' || tipo === 'message' ){
@@ -101,7 +101,7 @@ document.addEventListener("keypress", function (e){
 
   if (e.key === "Enter") {
 
-      const btn = document.querySelector('.plane-icon')
+      const btn = document.querySelector('.paper-plane')
       btn.click();
   }
 })

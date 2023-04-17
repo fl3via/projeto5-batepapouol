@@ -52,6 +52,7 @@ function resposta(resposta) {
       classeMensagem = 'message-me private-message'
     }
 
+
     chat.innerHTML += `<div data-test='message' class='${tipoDaMensagemDeMensagem} ${classeMensagem}'> 
     (${hora}) <strong>${nomeDoUsuarioQueEnviaMensagem}</strong> para ${nomeDoUsuarioQueRecebeMensagem}: ${texto}</div>`
   }
@@ -63,11 +64,11 @@ function deuErro(error) {
   console.log('deu erro')
   console.log(error)
   alert('Erro!')
-
+//verifica se o nome que o usuario digitou já esta em uso
   if (error.response.status === 400) {
     alert('Usuário já existente. Digite outro nome!')
   }
-
+//recarrega a pagina
   window.location.reload()
 }
 
@@ -88,6 +89,7 @@ function enviarMensagem() {
   input.value = '' // limpar input após enviar msg
 }
 
+//verifica se esta mantendo conexão a cada 5 segundos 
 function usuarioLivreParaAcesso() {
   buscaMensagemNoServidor()
   setInterval(function () {

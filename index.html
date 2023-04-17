@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/script.js"></script>
+    <link rel="stylesheet" href="./assets/reset.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Uol</title>
+</head>
+
+<body>
+    <header>
+        <img src="./assets/images/logo 1.svg" alt="logo uol">
+        <ion-icon name="people"></ion-icon>
+      </header>
+      <main class="chat" ></main>
+      <footer >
+        <input data-test="input-message" type="text" class="text" placeholder="Escreva aqui..." id="msg">
+        <ion-icon name="paper-plane-outline" id="paper-plane" data-test="send-message" onclick="enviarMensagem()"></ion-icon>
+      </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
